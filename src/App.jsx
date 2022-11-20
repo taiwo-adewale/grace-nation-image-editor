@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Header, Body, ImagePreview } from "./components";
+import { Header, Body } from "./components";
 
 function App() {
   return (
