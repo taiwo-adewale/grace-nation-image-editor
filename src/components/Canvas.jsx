@@ -1,34 +1,27 @@
 import React, { useEffect } from "react";
 
-import { useStateContext } from "../contexts/StateContext";
-
 const Canvas = ({ imgIndex, image }) => {
-  const { selectedImg, setSelectedImg, allLogoProps } = useStateContext();
-  const logoProps = allLogoProps[imgIndex];
-
   const renderImage = () => {
     const canvas = document.querySelector(`#canvas-${imgIndex}`);
     const ctx = document.querySelector(`#canvas-${imgIndex}`).getContext("2d");
     const image = document.querySelector(`#image-${imgIndex}`);
     const logo = document.querySelector("#logo");
 
-    canvas.width = 720;
+    const imageNaturalWidth = image.naturalWidth;
+    const imageNaturalHeight = image.naturalHeight;
 
-    if (image.naturalHeight > image.naturalWidth) {
-      canvas.height = 1080;
+    if (imageNaturalWidth <= imageNaturalHeight) {
+      var logoSize = imageNaturalWidth * 0.12;
     } else {
-      canvas.height = 540;
+      var logoSize = imageNaturalHeight * 0.12;
     }
 
-    ctx.clearRect(0, 0, 720, canvas.height);
-    ctx.drawImage(image, 0, 0, 720, canvas.height);
-    ctx.drawImage(
-      logo,
-      logoProps.logoX,
-      logoProps.logoY,
-      logoProps.logoSize,
-      logoProps.logoSize
-    );
+    canvas.width = imageNaturalWidth;
+    canvas.height = imageNaturalHeight;
+
+    ctx.clearRect(0, 0, imageNaturalWidth, imageNaturalHeight);
+    ctx.drawImage(image, 0, 0, imageNaturalWidth, imageNaturalHeight);
+    ctx.drawImage(logo, 10, 10, logoSize, logoSize);
   };
 
   useEffect(() => {
@@ -41,16 +34,16 @@ const Canvas = ({ imgIndex, image }) => {
     }
 
     return () => image.removeEventListener("load", renderImage);
-  }, [logoProps]);
+  }, []);
 
   return (
     <>
       <canvas
         id={`canvas-${imgIndex}`}
-        className={`w-full p-1 ${
-          selectedImg === imgIndex ? "outline-dashed outline-black" : ""
-        }`}
+        className="w-full bg-gray-300"
         onClick={() => setSelectedImg(imgIndex)}
+        width={100}
+        height={100}
       ></canvas>
 
       <img
