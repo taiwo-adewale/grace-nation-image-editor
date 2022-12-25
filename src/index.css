@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  @apply select-none;
+}
+
 *:focus {
   -webkit-tap-highlight-color: transparent;
   outline: none;

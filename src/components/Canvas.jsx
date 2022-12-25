@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const Canvas = ({ imgIndex, image }) => {
+const Canvas = ({ imgIndex, imageSrc }) => {
   const renderImage = () => {
     const canvas = document.querySelector(`#canvas-${imgIndex}`);
     const ctx = document.querySelector(`#canvas-${imgIndex}`).getContext("2d");
@@ -41,13 +41,12 @@ const Canvas = ({ imgIndex, image }) => {
       <canvas
         id={`canvas-${imgIndex}`}
         className="w-full bg-gray-300"
-        onClick={() => setSelectedImg(imgIndex)}
         width={100}
         height={100}
       ></canvas>
 
       <img
-        src={image}
+        src={imageSrc}
         id={`image-${imgIndex}`}
         key={`image-${imgIndex}`}
         className="hidden"

@@ -8,7 +8,7 @@ const ImagePreview = ({ allImages }) => {
     <>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 order-2">
         {allImages.map((image, index) => (
-          <Canvas key={`canvas-${index}`} imgIndex={index} image={image} />
+          <Canvas key={`canvas-${index}`} imgIndex={index} imageSrc={image} />
         ))}
       </div>
 
